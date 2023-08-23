@@ -15,16 +15,21 @@
         <li><a href="">About</a></li>
       </ul>
     </header>
-    <section class="modal-overlay" onclick="onCloseModal(this)">
+    <section class="modal-overlay" onclick="onCloseModal()">
       <div class="modal" onclick="stopPropagation(event)">
         <div class="canvas-container">
           <canvas width="400" height="400"></canvas>
-          <input type="text" class="overlay-text overlay-text-top" oninput="onChangeInput(this)" />
+          <input
+            type="text"
+            class="overlay-text overlay-text-top"
+            oninput="onChangeInput(this)"
+            onclick="onSelectInput(this)"
+          />
           <input
             type="text"
             class="overlay-text overlay-text-bottom"
             oninput="onChangeInput(this)"
-            onclick="onChange"
+            onclick="onSelectInput(this)"
           />
         </div>
         <div class="editor">
@@ -35,7 +40,9 @@
           </div>
           <button onclick="onChangeFontSize(1)">+</button>
           <button onclick="onChangeFontSize(-1)">-</button>
+          <button onclick="onLineSwitch()">Switch line</button>
         </div>
+        <button class="exit" onclick="onCloseModal()">&#10006;</button>
       </div>
     </section>
     <section class="gallery"></section>

@@ -29,30 +29,43 @@ var gMeme = {
     { txt: ' I sometimes eat Shwarma ', size: 25, color: 'blue' },
   ],
 }
+
 var gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 }
 
+// GOOD ✔ - probably be broken when change the whole rendering process
+function lineSwitch() {
+  gMeme.selectedLineIdx++
+  if (gMeme.lines.length <= gMeme.selectedLineIdx) gMeme.selectedLineIdx = 0
+}
+
+// GOOD ✔
 function setLineTxt(value) {
   gMeme.lines[gMeme.selectedLineIdx].txt = value
 }
 
+// GOOD ✔
 function changeTextColor(value) {
   gMeme.lines[gMeme.selectedLineIdx].color = value
 }
 
+// GOOD ✔
 function changeFontSize(value) {
   gMeme.lines[gMeme.selectedLineIdx].size += value
 }
 
+// GOOD ✔
 function setImg(el) {
   const url = new URL(el.src)
   const image = gImgs.find(img => img.url === url.pathname)
   gMeme.selectedImgId = image.id
 }
 
+// GOOD ✔
 function getMeme() {
   return gMeme
 }
 
+// GOOD ✔
 function getImg() {
   return gImgs
 }

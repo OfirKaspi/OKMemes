@@ -12,11 +12,37 @@
 
 /* Actual modal */
 .modal {
+  position: relative;
   display: flex;
+  justify-content: space-between;
   gap: 20px;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-  width: 80vw; /* Set a maximum width for the modal if needed */
+  width: 720px; /* Set a maximum width for the modal if needed */
+}
+.exit {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background-color: white;
+  color: black;
+  border: 0;
+  padding: 10px 15px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: 0.3s;
+}
+
+.exit:hover {
+  color: rgb(150, 206, 65);
+  box-shadow: 0 0 15px rgb(150, 206, 65, 0.8);
+}
+
+@media (max-width: 767px) {
+  .modal {
+    flex-direction: column;
+    width: 350px;
+  }
 }

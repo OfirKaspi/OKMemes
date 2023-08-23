@@ -1,10 +1,16 @@
 // TODO - make the text downloaded aswell
+// TODO - make the text dragable
+// TODO - make the code more organized
+// TODO - Q15 add a 'add line' button
 
 'use strict'
 
 let gElCanvas
 let gCtx
+let gStartPos
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
+// GOOD ✔
 function onInit() {
   gElCanvas = document.querySelector('canvas')
   gCtx = gElCanvas.getContext('2d')
@@ -12,6 +18,7 @@ function onInit() {
   renderGallery()
 }
 
+// GOOD ✔
 function renderGallery() {
   const images = getImg()
   const strHTMLs = images.map(
@@ -25,6 +32,7 @@ function renderGallery() {
   elGallery.innerHTML = strHTMLs.join('')
 }
 
+// PROBLEM👇
 function renderMeme() {
   const meme = getMeme()
   const images = getImg()
@@ -34,10 +42,12 @@ function renderMeme() {
   newImage.src = image.url
   newImage.onload = () => {
     coverCanvasWithImg(newImage)
+    // drawText('hello')
   }
   setOverlayText(meme)
 }
 
+// PROBLEM👇
 function onSelectImg(elImg) {
   const elModalOverlay = document.querySelector('.modal-overlay')
   elModalOverlay.style.display = 'flex'
@@ -47,11 +57,13 @@ function onSelectImg(elImg) {
   setOverlayText(meme)
 }
 
+// GOOD ✔
 function coverCanvasWithImg(elImg) {
   gElCanvas.height = (elImg.naturalHeight / elImg.naturalWidth) * gElCanvas.width
   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
+// PROBLEM👇
 function setOverlayText(meme) {
   const elTopOverlayText = document.querySelector('.overlay-text-top')
   elTopOverlayText.value = meme.lines[0].txt
@@ -64,38 +76,60 @@ function setOverlayText(meme) {
   elbottomOverlayText.style.fontSize = meme.lines[1].size + 'px'
 }
 
+// GOOD ✔
 function onChangeInput(el) {
   setLineTxt(el.value)
   renderMeme()
-
-  //   el.style.width = 'auto'
-  //   el.style.width = el.scrollWidth + 'px'
-  //   el.style.width = el.value.length + 2 + 'ch'
 }
 
+// GOOD ✔ - needs to check if text is implemented
 function downloadCanvas(elLink) {
   const dataUrl = gElCanvas.toDataURL()
   console.log('dataUrl', dataUrl)
 
   elLink.href = dataUrl
-  // Set a name for the downloaded file
   elLink.download = 'my-img'
 }
 
-function onCloseModal(el) {
-  el.style.display = 'none'
+// GOOD ✔
+function onCloseModal() {
+  const elModalOverlay = document.querySelector('.modal-overlay')
+  elModalOverlay.style.display = 'none'
 }
 
+// GOOD ✔ - maybe can join it to the onCloseModal func
 function stopPropagation(ev) {
   ev.stopPropagation()
 }
 
+// GOOD ✔
 function onChangeTextColor(el) {
   changeTextColor(el.value)
   renderMeme()
 }
 
+// GOOD ✔
 function onChangeFontSize(value) {
   changeFontSize(value)
   renderMeme()
 }
+
+// GOOD ✔ - probably be broken when change the whole rendering process
+function onLineSwitch() {
+  lineSwitch()
+  renderMeme()
+}
+
+// MUST BE USED👇
+
+// function drawText(text, fontSize = 16, color = 'black', x = 50, y = 50) {
+//   gCtx.lineWidth = 2
+//   gCtx.strokeStyle = 'brown'
+//   gCtx.fillStyle = color
+//   gCtx.font = `${fontSize}px Arial`
+//   gCtx.textAlign = 'center'
+//   gCtx.textBaseline = 'middle'
+
+//   gCtx.fillText(text, x, y)
+//   gCtx.strokeText(text, x, y)
+// }

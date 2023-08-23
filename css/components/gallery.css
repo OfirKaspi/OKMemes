@@ -10,5 +10,12 @@
 
 .gallery article {
   margin: 20px 10px 0px 10px;
-  width: 30%;
+  width: 20%;
+}
+
+@media (max-width: 767px) {
+  .gallery article {
+    /* margin: 10px 5px 0px 5px; */
+    width: 40%;
+  }
 }

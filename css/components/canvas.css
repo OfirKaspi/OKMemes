@@ -10,7 +10,7 @@ canvas {
 .overlay-text {
   position: absolute;
   padding: 20px 0;
-  width: 100%;
+  width: 95%;
   text-align: center;
   overflow: hidden; /* Hide horizontal scrollbar */
   white-space: pre-wrap;
@@ -31,4 +31,11 @@ canvas {
 .overlay-text:hover {
   border: 2px solid gray;
   resize: both;
+}
+
+@media (max-width: 767px) {
+  canvas {
+    width: 300px;
+    height: 300px;
+  }
 }
