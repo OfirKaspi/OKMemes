@@ -7,23 +7,35 @@
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body onload="onInit()">
-    <header>
+    <header class="flex space-between align-center">
       <span>MemeGen</span>
-      <ul>
-        <li>Gallery</li>
-        <li>Memes</li>
-        <li>About</li>
+      <ul class="nav clean-list flex space-between align-center">
+        <li><a href="">Gallery</a></li>
+        <li><a href="">Memes</a></li>
+        <li><a href="">About</a></li>
       </ul>
     </header>
-    <section class="editor">
-      <div class="canvas-container">
-        <canvas width="400" height="400"></canvas>
-        <textarea
-          wrap="soft"
-          class="overlay-text"
-          value=""
-          oninput="onChangeTextarea(this)"
-        ></textarea>
+    <section class="modal-overlay" onclick="onCloseModal(this)">
+      <div class="modal" onclick="stopPropagation(event)">
+        <div class="canvas-container">
+          <canvas width="400" height="400"></canvas>
+          <input type="text" class="overlay-text overlay-text-top" oninput="onChangeInput(this)" />
+          <input
+            type="text"
+            class="overlay-text overlay-text-bottom"
+            oninput="onChangeInput(this)"
+            onclick="onChange"
+          />
+        </div>
+        <div class="editor">
+          <a href="#" onclick="downloadCanvas(this)" download="file-name">Download</a>
+          <div>
+            <label for="textColor">choose a text color</label>
+            <input type="color" id="textColor" oninput="onChangeTextColor(this)" />
+          </div>
+          <button onclick="onChangeFontSize(1)">+</button>
+          <button onclick="onChangeFontSize(-1)">-</button>
+        </div>
       </div>
     </section>
     <section class="gallery"></section>

@@ -8,7 +8,8 @@
 @import url('./basics/helpers.css');
 
 /* COMPONENTS */
+@import url('./components/gallery.css');
+@import url('./components/modal.css');
 @import url('./components/main-header.css');
-@import url('./components/gallery-card.css');
 @import url('./components/editor.css');
 @import url('./components/canvas.css');
