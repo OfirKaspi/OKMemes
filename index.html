@@ -6,10 +6,28 @@
     <title>Meme Generator</title>
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body>
-    <h1>hello</h1>
+  <body onload="onInit()">
+    <header>
+      <span>MemeGen</span>
+      <ul>
+        <li>Gallery</li>
+        <li>Memes</li>
+        <li>About</li>
+      </ul>
+    </header>
+    <section class="editor">
+      <div class="canvas-container">
+        <canvas width="400" height="400"></canvas>
+        <textarea
+          wrap="soft"
+          class="overlay-text"
+          value=""
+          oninput="onChangeTextarea(this)"
+        ></textarea>
+      </div>
+    </section>
     <section class="gallery"></section>
-    <section class="editor"></section>
+    <script src="js/services/service.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
