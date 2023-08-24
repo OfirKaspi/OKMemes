@@ -14,7 +14,7 @@ const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 function onInit() {
   gElCanvas = document.querySelector('canvas')
   gCtx = gElCanvas.getContext('2d')
-  renderMeme()
+  renderTextInput()
   renderGallery()
 }
 
@@ -32,10 +32,11 @@ function renderGallery() {
   elGallery.innerHTML = strHTMLs.join('')
 }
 
-function renderText() {
+function renderTextInput() {
   const meme = getMeme()
-
-  console.log(meme.lines[meme.selectedLineIdx])
+  const elTextInput = document.querySelector('.text-input')
+  elTextInput.value = meme.lines[meme.selectedLineIdx].txt
+  console.log(elTextInput.value)
 }
 
 // PROBLEM👇
@@ -50,6 +51,7 @@ function renderMeme() {
   newImage.src = image.url
   newImage.onload = () => {
     coverCanvasWithImg(newImage)
+    drawText()
     // drawText(memeLine.text, memeLine.size, memeLine.color)
     // setOverlayText(meme)
   }
@@ -61,6 +63,7 @@ function onSelectImg(elImg) {
   elModalOverlay.style.display = 'flex'
   setImg(elImg)
   coverCanvasWithImg(elImg)
+  renderMeme()
   // const meme = getMeme()
   // setOverlayText(meme)
 }
@@ -136,16 +139,29 @@ function stopPropagation(ev) {
 
 // MUST BE USED👇
 
-function drawText(el) {
-  const x = gElCanvas.height / 2
-  const y = gElCanvas.width / 2
-  gCtx.lineWidth = 2
-  gCtx.strokeStyle = 'brown'
-  gCtx.fillStyle = 'blue'
-  gCtx.font = '20px Arial'
+function drawText(el = document.querySelector('.text-input'), x = gElCanvas.height / 2, y = 20) {
+  const meme = getMeme()
+  const memeLine = meme.lines[meme.selectedLineIdx]
+  // gCtx.lineWidth = 1
+  // gCtx.strokeStyle = 'brown'
+  gCtx.fillStyle = memeLine.color
+  gCtx.font = `${memeLine.size}px Arial`
   gCtx.textAlign = 'center'
-  gCtx.textBaseline = 'middle'
+  gCtx.textBaseline = 'top'
 
   gCtx.fillText(el.value, x, y)
   gCtx.strokeText(el.value, x, y)
 }
+
+// MAKE THE TEXT STAY INSIDE THE CANVAS
+
+// function wrapText(text) {
+//   let linesArray = []
+//   let lineCounter = 0
+//   let line = ''
+//   let words = text.split(' ')
+//   for (let i = 0; i < words.length; i++) {
+//     var testLine = line + words[i] + ' '
+//   }
+//   gCtx.fillText(testLine, gElCanvas.width / 2, gElCanvas.height / 2)
+// }

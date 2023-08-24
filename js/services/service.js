@@ -23,7 +23,7 @@ var gImgs = [
 
 var gMeme = {
   selectedImgId: 2,
-  selectedLineIdx: 1,
+  selectedLineIdx: 0,
   lines: [
     { txt: ' I sometimes eat Falafel ', size: 20, color: 'red', isDrag: false },
     { txt: ' I sometimes eat Shwarma ', size: 25, color: 'blue', isDrag: false },
