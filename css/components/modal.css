@@ -8,6 +8,7 @@
   display: none;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 /* Actual modal */
@@ -24,12 +25,12 @@
 }
 .exit {
   position: absolute;
-  top: -15px;
-  right: -15px;
+  top: -16px;
+  right: -16px;
   background-color: white;
   color: black;
   border: 0;
-  padding: 10px 15px;
+  padding: 10px 14px;
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   transition: 0.3s;
@@ -44,5 +45,12 @@
   .modal {
     flex-direction: column;
     width: 350px;
+  }
+}
+
+@media (min-width: 1020px) {
+  .modal {
+    width: 950px;
+    height: 600px;
   }
 }

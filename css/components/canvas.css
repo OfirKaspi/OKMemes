@@ -9,16 +9,20 @@ canvas {
 
 .overlay-text {
   position: absolute;
+  width: 100%;
+}
+
+/* .overlay-text {
   padding: 20px 0;
   width: 95%;
   text-align: center;
-  overflow: hidden; /* Hide horizontal scrollbar */
+  overflow: hidden;
   white-space: pre-wrap;
   background-color: transparent;
   border: 0;
-}
+} */
 
-.overlay-text-top {
+/* .overlay-text-top {
   top: 0;
   left: 0;
 }
@@ -26,16 +30,21 @@ canvas {
 .overlay-text-bottom {
   bottom: 0;
   left: 0;
-}
+} */
 
-.overlay-text:hover {
+/* .overlay-text:hover {
   border: 2px solid gray;
   resize: both;
-}
+} */
 
 @media (max-width: 767px) {
   canvas {
-    width: 300px;
-    height: 300px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1020px) {
+  canvas {
+    height: 100%;
   }
 }

@@ -25,12 +25,31 @@ var gMeme = {
   selectedImgId: 2,
   selectedLineIdx: 1,
   lines: [
-    { txt: ' I sometimes eat Falafel ', size: 20, color: 'red' },
-    { txt: ' I sometimes eat Shwarma ', size: 25, color: 'blue' },
+    { txt: ' I sometimes eat Falafel ', size: 20, color: 'red', isDrag: false },
+    { txt: ' I sometimes eat Shwarma ', size: 25, color: 'blue', isDrag: false },
   ],
 }
 
 var gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 }
+
+// function createNewLine(pos) {
+//   gMeme.lines.push = {
+//     pos,
+//     txt: '---Add Text---',
+//     size: 20,
+//     color: 'blue',
+//     isDrag: false,
+//   }
+// }
+
+function isCircleClicked(clickedPos) {
+  const { pos } = gCircle
+  // Calc the distance between two dots
+  const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2)
+  // console.log('distance', distance)
+  //If its smaller then the radius of the circle we are inside
+  return distance <= gCircle.size
+}
 
 // GOOD ✔ - probably be broken when change the whole rendering process
 function lineSwitch() {
@@ -58,6 +77,10 @@ function setImg(el) {
   const url = new URL(el.src)
   const image = gImgs.find(img => img.url === url.pathname)
   gMeme.selectedImgId = image.id
+}
+
+function chooseInput(value) {
+  gMeme.selectedLineIdx = value
 }
 
 // GOOD ✔

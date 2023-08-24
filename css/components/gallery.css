@@ -9,8 +9,19 @@
 }
 
 .gallery article {
-  margin: 20px 10px 0px 10px;
+  margin: 2% 1% 0 1%;
   width: 20%;
+}
+
+.gallery article img {
+  cursor: pointer;
+  filter: grayscale(1);
+  transition: 0.3s;
+}
+
+.gallery article img:hover {
+  box-shadow: 0 0 10px rgb(150, 206, 65, 0.8);
+  filter: unset;
 }
 
 @media (max-width: 767px) {
