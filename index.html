@@ -10,9 +10,24 @@
     <header class="flex space-between align-center">
       <span>MemeGen</span>
       <ul class="nav clean-list flex space-between align-center">
-        <li><a href="">Gallery</a></li>
-        <li><a href="">Memes</a></li>
-        <li><a href="">About</a></li>
+        <li><a onclick="onRandomMeme()">I'm Flexible</a></li>
+        <!-- <li>
+          <input
+            type="file"
+            class="file-input btn"
+            name="image"
+            onchange="onImgInput(event)"
+            accept="image/*"
+          />
+        </li> -->
+        <li>
+          <input
+            type="text"
+            class="keywordInput"
+            placeholder="Filter by keyword"
+            oninput="onFilterByKeyword()"
+          />
+        </li>
       </ul>
     </header>
     <section class="modal-overlay" onclick="onCloseModal()">
@@ -21,33 +36,35 @@
           <canvas width="400" height="400"></canvas>
         </div>
         <div class="editor">
-          <input class="text-input" type="text" oninput="renderMeme()" />
-          <!-- <input
-            type="text"
-            class="overlay-text overlay-text-top"
-            oninput="onChangeInput(this)"
-            onclick="onChooseInput(0)"
-          />
-          <input
-            type="text"
-            class="overlay-text overlay-text-bottom"
-            oninput="onChangeInput(this)"
-            onclick="onChooseInput(1)"
-          /> -->
-          <a href="#" onclick="downloadCanvas(this)" download="file-name">Download</a>
-          <div>
-            <label for="textColor">choose a text color</label>
-            <input type="color" id="textColor" oninput="onChangeTextColor(this)" />
-          </div>
-          <button onclick="onChangeFontSize(1)">+</button>
-          <button onclick="onChangeFontSize(-1)">-</button>
+          <input class="text-input" type="text" oninput="onSetLineText(this)" />
           <button onclick="onLineSwitch()">Switch line</button>
+          <div class="text-changer">
+            <input type="color" id="textColor" oninput="onChangeTextColor(this)" />
+            <label for="textColor">Text Color</label>
+          </div>
+          <div class="plus-minus">
+            <button class="plus" onclick="onChangeFontSize(1)">A+</button>
+            <button class="minus" onclick="onChangeFontSize(-1)">A-</button>
+          </div>
+          <button class="download" onclick="downloadCanvas(this)" download="file-name">
+            Download
+          </button>
+          <button class="save" onclick="onSaveMeme()">Save Meme</button>
+          <button class="fb" onclick="onUploadImg()">
+            Upload Image from Canvas and Share on Facebook
+          </button>
+          <!-- <button onclick="onToggleSecondLine(this)">Add Line</button> -->
         </div>
         <button class="exit" onclick="onCloseModal()">&#10006;</button>
       </div>
     </section>
+
     <section class="gallery"></section>
+    <p class="no-images-msg">☹ No Images Found ☹</p>
+    <script src="js/services/util.js"></script>
     <script src="js/services/service.js"></script>
+    <script src="js/services/upload-from-local.js"></script>
+    <script src="js/services/upload-to-fb.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

@@ -4,15 +4,30 @@
   box-sizing: border-box;
 }
 
-/* body {
-  margin: 0;
-} */
+input[type='text'],
+button {
+  padding: 5px 10px;
+  border-radius: 10px;
+  outline: none;
+  border: 2px solid rgb(150, 206, 65);
+  background-color: white;
+}
+
+button:hover {
+  box-shadow: 0 0 5px rgb(150, 206, 65);
+}
+
+button,
+input[type='color'] {
+  cursor: pointer;
+}
 
 img {
   width: 100%;
 }
 
 a {
+  cursor: pointer;
   text-decoration: none;
   color: black;
 }

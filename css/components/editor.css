@@ -4,5 +4,22 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  flex: auto;
+}
+
+.editor * {
+  width: 100%;
+}
+
+.editor .plus-minus,
+.editor .text-changer {
+  display: flex;
+  gap: 10px;
+}
+
+.editor .text-changer {
+  padding: 5px 10px;
+  border-radius: 10px;
+  outline: none;
+  border: 2px solid rgb(150, 206, 65);
+  background-color: white;
 }

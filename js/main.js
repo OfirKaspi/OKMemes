@@ -18,18 +18,52 @@ function onInit() {
   renderGallery()
 }
 
+// function onSaveMeme() {
+//   const canvasDataURL = gElCanvas.toDataURL()
+//   const metadata = { timestamp: new Date().toISOString(), caption: 'My funny meme' }
+//   saveMemeToLocalStorage(canvasDataURL, metadata)
+// }
+
+// GOOD
+function onRandomMeme() {
+  const imgs = getImgs()
+  const randNum = getRandomIntInclusive(1, imgs.length)
+  setSelectedImgId(imgs[randNum - 1].id)
+  const elImg = document.querySelector(`img[src="images/${randNum}.jpg"]`)
+  onSelectImg(elImg)
+}
+
+function onFilterByKeyword() {
+  const keywordInput = document.querySelector('.keywordInput')
+  const filterKeyword = keywordInput.value.toLowerCase()
+
+  renderGallery(filterKeyword)
+}
+
 // GOOD ✔
-function renderGallery() {
-  const images = getImg()
-  const strHTMLs = images.map(
+function renderGallery(filterKeyword = '') {
+  const images = getImgs()
+  const filteredImages = filterKeyword
+    ? images.filter(img => img.keywords.some(keyword => keyword.includes(filterKeyword)))
+    : images
+
+  const elNoImgMsg = document.querySelector('.no-images-msg')
+  elNoImgMsg.style.display = filteredImages.length ? 'none' : 'block'
+
+  const strHTMLs = filteredImages.map(
     img =>
       `<article>
-          <img src="images/${img.id}.jpg" onclick="onSelectImg(this)"/>
+          <img data-id="${img.keywords}" src="images/${img.id}.jpg" onclick="onSelectImg(this)"/>
         </article>`
   )
 
   const elGallery = document.querySelector('.gallery')
   elGallery.innerHTML = strHTMLs.join('')
+}
+
+function onSetLineText(el) {
+  setLineText(el.value)
+  renderMeme()
 }
 
 function renderTextInput() {
@@ -42,10 +76,8 @@ function renderTextInput() {
 // PROBLEM👇
 function renderMeme() {
   const meme = getMeme()
-  const images = getImg()
+  const images = getImgs()
   const memeId = meme.selectedImgId
-  const memeLineIdx = meme.selectedLineIdx
-  const memeLine = meme.lines[memeLineIdx]
   const image = images.find(image => image.id === memeId)
   const newImage = new Image()
   newImage.src = image.url
@@ -74,26 +106,6 @@ function coverCanvasWithImg(elImg) {
   gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-// PROBLEM👇
-// function setOverlayText(meme) {
-//   const elTopOverlayText = document.querySelector('.overlay-text-top')
-//   elTopOverlayText.value = meme.lines[0].txt
-//   elTopOverlayText.style.color = meme.lines[0].color
-//   elTopOverlayText.style.fontSize = meme.lines[0].size + 'px'
-
-//   const elbottomOverlayText = document.querySelector('.overlay-text-bottom')
-//   elbottomOverlayText.value = meme.lines[1].txt
-//   elbottomOverlayText.style.color = meme.lines[1].color
-//   elbottomOverlayText.style.fontSize = meme.lines[1].size + 'px'
-// }
-
-// GOOD ✔
-// function onChangeInput(el) {
-//   setLineTxt(el.value)
-//   renderText()
-//   renderMeme()
-// }
-
 // GOOD ✔ - needs to check if text is implemented
 function downloadCanvas(elLink) {
   const dataUrl = gElCanvas.toDataURL()
@@ -115,37 +127,34 @@ function stopPropagation(ev) {
 }
 
 // GOOD ✔
-// function onChangeTextColor(el) {
-//   changeTextColor(el.value)
-//   renderMeme()
-// }
+function onChangeTextColor(el) {
+  changeTextColor(el.value)
+  renderMeme()
+}
 
 // GOOD ✔
-// function onChangeFontSize(value) {
-//   changeFontSize(value)
-//   renderMeme()
-// }
+function onChangeFontSize(value) {
+  changeFontSize(value)
+  renderMeme()
+}
 
 // GOOD ✔ - probably be broken when change the whole rendering process
-// function onLineSwitch() {
-//   lineSwitch()
-//   renderMeme()
-// }
-
-// function onChooseInput(value) {
-//   chooseInput(value)
-//   renderMeme()
-// }
+function onLineSwitch() {
+  const lineText = lineSwitch()
+  const elTextInput = document.querySelector('.text-input')
+  elTextInput.value = lineText
+  renderMeme()
+}
 
 // MUST BE USED👇
 
 function drawText(el = document.querySelector('.text-input'), x = gElCanvas.height / 2, y = 20) {
   const meme = getMeme()
   const memeLine = meme.lines[meme.selectedLineIdx]
-  // gCtx.lineWidth = 1
-  // gCtx.strokeStyle = 'brown'
+  gCtx.lineWidth = 1
+  gCtx.strokeStyle = 'black'
   gCtx.fillStyle = memeLine.color
-  gCtx.font = `${memeLine.size}px Arial`
+  gCtx.font = `${memeLine.size}px Impact`
   gCtx.textAlign = 'center'
   gCtx.textBaseline = 'top'
 
@@ -154,6 +163,19 @@ function drawText(el = document.querySelector('.text-input'), x = gElCanvas.heig
 }
 
 // MAKE THE TEXT STAY INSIDE THE CANVAS
+
+// function onToggleSecondLine(el) {
+//   const meme = getMeme()
+//   const lineText = meme.lines[1].txt
+//   if (el.innerText === 'Add Line') {
+//     drawText(lineText, gElCanvas.height / 2, gElCanvas.height - 20)
+//     el.innerText = 'Remove Line'
+//   } else {
+//     el.innerText = 'Add Line'
+//   }
+//   toggleSecondLine()
+//   renderMeme()
+// }
 
 // function wrapText(text) {
 //   let linesArray = []
@@ -164,4 +186,36 @@ function drawText(el = document.querySelector('.text-input'), x = gElCanvas.heig
 //     var testLine = line + words[i] + ' '
 //   }
 //   gCtx.fillText(testLine, gElCanvas.width / 2, gElCanvas.height / 2)
+// }
+
+// function renderLine() {
+//   const meme = getMeme()
+//   if (meme.selectedLineIdx < gMeme.lines.length) {
+//     drawText(meme.lines)
+//   }
+// }
+
+// function onChooseInput(value) {
+//   chooseInput(value)
+//   renderMeme()
+// }
+
+// PROBLEM👇
+// function setOverlayText(meme) {
+//   const elTopOverlayText = document.querySelector('.overlay-text-top')
+//   elTopOverlayText.value = meme.lines[0].txt
+//   elTopOverlayText.style.color = meme.lines[0].color
+//   elTopOverlayText.style.fontSize = meme.lines[0].size + 'px'
+
+//   const elbottomOverlayText = document.querySelector('.overlay-text-bottom')
+//   elbottomOverlayText.value = meme.lines[1].txt
+//   elbottomOverlayText.style.color = meme.lines[1].color
+//   elbottomOverlayText.style.fontSize = meme.lines[1].size + 'px'
+// }
+
+// GOOD ✔
+// function onChangeInput(el) {
+//   setLineTxt(el.value)
+//   renderText()
+//   renderMeme()
 // }
