@@ -6,9 +6,11 @@
     <title>Meme Generator</title>
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body onload="onInit()">
+  <body class="flex column" onload="onInit()">
     <header class="flex space-between align-center">
-      <span>MemeGen</span>
+      <div class="flex align-center">
+        <span><img src="images/icons8-angry-face-meme-100.png" /></span>OKMemes
+      </div>
       <ul class="nav clean-list flex space-between align-center">
         <li><a onclick="onRandomMeme()">I'm Flexible</a></li>
         <!-- <li>
@@ -30,36 +32,56 @@
         </li>
       </ul>
     </header>
-    <section class="modal-overlay" onclick="onCloseModal()">
-      <div class="modal" onclick="stopPropagation(event)">
-        <div class="canvas-container">
+    <section class="modal-overlay absolute align-center justify-center" onclick="onCloseModal()">
+      <div class="modal flex relative space-between" onclick="stopPropagation(event)">
+        <div class="canvas-container relative">
           <canvas width="400" height="400"></canvas>
         </div>
-        <div class="editor">
+        <div class="editor flex column align-center justify-center">
           <input class="text-input" type="text" oninput="onSetLineText(this)" />
           <button onclick="onLineSwitch()">Switch line</button>
-          <div class="text-changer">
-            <input type="color" id="textColor" oninput="onChangeTextColor(this)" />
-            <label for="textColor">Text Color</label>
+          <div class="gap flex">
+            <div class="text-changer flex align-center">
+              <label class="flex justify-center" for="textColor">Text Color:</label>
+              <input
+                type="color"
+                id="textColor"
+                class="flex"
+                oninput="onChangeTextColor(this)"
+                value="#ffffff"
+              />
+            </div>
+            <select class="text-changer font-align" onchange="onChangeAlignment()">
+              <option value="center" selected>Align to center</option>
+              <option value="right">Align to left</option>
+              <option value="left">Align to right</option>
+            </select>
           </div>
-          <div class="plus-minus">
+          <div class="gap font-changes flex">
+            <select class="font-drop-down text-changer" onchange="onChangeFont()">
+              <option value="Impact" selected>Impact</option>
+              <option value="Arial">Arial</option>
+              <option value="Open Sans">Open Sans</option>
+            </select>
             <button class="plus" onclick="onChangeFontSize(1)">A+</button>
             <button class="minus" onclick="onChangeFontSize(-1)">A-</button>
           </div>
-          <button class="download" onclick="downloadCanvas(this)" download="file-name">
-            Download
-          </button>
-          <button class="save" onclick="onSaveMeme()">Save Meme</button>
+          <div class="gap flex">
+            <button class="download" onclick="downloadCanvas(this)" download="file-name">
+              Download
+            </button>
+            <button class="save" onclick="onSaveMeme()">Save Meme</button>
+          </div>
           <button class="fb" onclick="onUploadImg()">
             Upload Image from Canvas and Share on Facebook
           </button>
           <!-- <button onclick="onToggleSecondLine(this)">Add Line</button> -->
         </div>
-        <button class="exit" onclick="onCloseModal()">&#10006;</button>
+        <button class="exit absolute" onclick="onCloseModal()">&#10006;</button>
       </div>
     </section>
 
-    <section class="gallery"></section>
+    <section class="gallery flex align-center justify-center"></section>
     <p class="no-images-msg">☹ No Images Found ☹</p>
     <script src="js/services/util.js"></script>
     <script src="js/services/service.js"></script>

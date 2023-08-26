@@ -1,10 +1,7 @@
 .gallery {
-  display: flex;
   flex-wrap: wrap;
-  align-items: center;
   align-self: center;
   justify-self: center;
-  justify-content: center;
   width: 90vw;
 }
 
@@ -20,7 +17,7 @@
 }
 
 .gallery article img:hover {
-  box-shadow: 0 0 10px rgb(150, 206, 65, 0.8);
+  box-shadow: 0 0 10px var(--clrPrimary-1);
   filter: unset;
 }
 
@@ -29,13 +26,12 @@
   margin-top: 50px;
   padding: 10px;
   border-radius: 20px;
-  box-shadow: 0px 0px 25px rgb(150, 206, 65);
+  box-shadow: 0px 0px 25px var(--clrPrimaryBase);
   font-size: 25px;
 }
 
 @media (max-width: 767px) {
   .gallery article {
-    /* margin: 10px 5px 0px 5px; */
     width: 40%;
   }
 }

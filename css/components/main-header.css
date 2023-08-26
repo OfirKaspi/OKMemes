@@ -1,15 +1,17 @@
 header {
-  display: flex;
   min-height: 80px;
   padding: 0 50px;
-  border-bottom: 1px solid rgb(140, 233, 0);
+  border-bottom: 1px solid var(--clrPrimary1);
   margin-bottom: 30px;
-  box-shadow: 0 5px 15px rgb(150, 206, 65, 0.8);
+  box-shadow: 0 5px 15px var(--clrPrimary-1);
 }
 
-header span {
-  display: flex;
+header div {
   font-size: 25px;
+}
+
+header div span {
+  width: 60px;
 }
 
 header .nav {
@@ -17,13 +19,13 @@ header .nav {
 }
 
 header .nav a:hover {
-  color: rgb(150, 206, 65);
+  color: var(--clrPrimaryBase);
 }
 
-@media (max-width: 512px) {
+@media (max-width: 575px) {
   header {
     flex-direction: column;
-    gap: 15px;
+    gap: 5px;
     padding: 20px 50px;
   }
 

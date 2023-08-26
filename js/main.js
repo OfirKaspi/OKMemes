@@ -146,17 +146,34 @@ function onLineSwitch() {
   renderMeme()
 }
 
-// MUST BE USED👇
+function onChangeFont() {
+  renderMeme()
+}
 
-function drawText(el = document.querySelector('.text-input'), x = gElCanvas.height / 2, y = 20) {
+function onChangeAlignment() {
+  renderMeme()
+}
+
+function drawText(el = document.querySelector('.text-input'), x = gElCanvas.width / 2, y = 20) {
+  const fontType = document.querySelector('.font-drop-down').value
+  const fontAlign = document.querySelector('.font-align').value
   const meme = getMeme()
   const memeLine = meme.lines[meme.selectedLineIdx]
-  gCtx.lineWidth = 1
+  gCtx.lineWidth = 2
   gCtx.strokeStyle = 'black'
   gCtx.fillStyle = memeLine.color
-  gCtx.font = `${memeLine.size}px Impact`
-  gCtx.textAlign = 'center'
+  gCtx.font = `${memeLine.size}px ${fontType}`
+  gCtx.textAlign = fontAlign
   gCtx.textBaseline = 'top'
+
+  const textWidth = gCtx.measureText(el.value).width
+  // let x = x
+
+  if (fontAlign === 'left') {
+    x = gElCanvas.width - textWidth // Adjust this value as needed for your desired left margin
+  } else if (fontAlign === 'right') {
+    x = 0 + textWidth // Adjust this value as needed for your desired right margin
+  }
 
   gCtx.fillText(el.value, x, y)
   gCtx.strokeText(el.value, x, y)

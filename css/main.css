@@ -4,7 +4,6 @@
 
 /* BASICS */
 @import url('./basics/base.css');
-@import url('./basics/layout.css');
 @import url('./basics/helpers.css');
 
 /* COMPONENTS */

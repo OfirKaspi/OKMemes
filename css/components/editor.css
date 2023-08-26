@@ -1,8 +1,4 @@
 .editor {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 20px;
 }
 
@@ -10,9 +6,7 @@
   width: 100%;
 }
 
-.editor .plus-minus,
-.editor .text-changer {
-  display: flex;
+.editor .gap {
   gap: 10px;
 }
 
@@ -20,6 +14,28 @@
   padding: 5px 10px;
   border-radius: 10px;
   outline: none;
-  border: 2px solid rgb(150, 206, 65);
-  background-color: white;
+  border: 2px solid var(--clrPrimaryBase);
+  background-color: var(--bgcBase);
+}
+
+.editor .text-changer:hover {
+  cursor: pointer;
+  box-shadow: 0 0 5px var(--clrPrimaryBase);
+}
+
+#textColor {
+  max-width: 20px;
+  max-height: 40px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+#textColor::-webkit-color-swatch {
+  border-radius: 15px;
+}
+
+@media (max-width: 767px) {
+  .editor {
+    gap: 10px;
+  }
 }

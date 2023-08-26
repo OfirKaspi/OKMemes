@@ -1,15 +1,9 @@
 .canvas-container {
   display: inline-block;
-  position: relative;
 }
 
 canvas {
   border: 1px solid black;
-}
-
-.overlay-text {
-  position: absolute;
-  width: 100%;
 }
 
 @media (max-width: 767px) {

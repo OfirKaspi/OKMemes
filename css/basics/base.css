@@ -9,12 +9,12 @@ button {
   padding: 5px 10px;
   border-radius: 10px;
   outline: none;
-  border: 2px solid rgb(150, 206, 65);
-  background-color: white;
+  border: 2px solid var(--clrPrimaryBase);
+  background-color: var(--bgcBase);
 }
 
 button:hover {
-  box-shadow: 0 0 5px rgb(150, 206, 65);
+  box-shadow: 0 0 5px var(--clrPrimaryBase);
 }
 
 button,
