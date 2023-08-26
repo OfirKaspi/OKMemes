@@ -1,8 +1,3 @@
-// TODO - make the text downloaded aswell
-// TODO - make the text dragable
-// TODO - make the code more organized
-// TODO - Q15 add a 'add line' button
-
 'use strict'
 
 let gElCanvas
@@ -10,7 +5,6 @@ let gCtx
 let gStartPos
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
-// GOOD ✔
 function onInit() {
   gElCanvas = document.querySelector('canvas')
   gCtx = gElCanvas.getContext('2d')
@@ -18,13 +12,6 @@ function onInit() {
   renderGallery()
 }
 
-// function onSaveMeme() {
-//   const canvasDataURL = gElCanvas.toDataURL()
-//   const metadata = { timestamp: new Date().toISOString(), caption: 'My funny meme' }
-//   saveMemeToLocalStorage(canvasDataURL, metadata)
-// }
-
-// GOOD
 function onRandomMeme() {
   const imgs = getImgs()
   const randNum = getRandomIntInclusive(1, imgs.length)
@@ -40,7 +27,6 @@ function onFilterByKeyword() {
   renderGallery(filterKeyword)
 }
 
-// GOOD ✔
 function renderGallery(filterKeyword = '') {
   const images = getImgs()
   const filteredImages = filterKeyword
@@ -73,7 +59,6 @@ function renderTextInput() {
   console.log(elTextInput.value)
 }
 
-// PROBLEM👇
 function renderMeme() {
   const meme = getMeme()
   const images = getImgs()
@@ -84,12 +69,9 @@ function renderMeme() {
   newImage.onload = () => {
     coverCanvasWithImg(newImage)
     drawText()
-    // drawText(memeLine.text, memeLine.size, memeLine.color)
-    // setOverlayText(meme)
   }
 }
 
-// PROBLEM👇
 function onSelectImg(elImg) {
   const elModalOverlay = document.querySelector('.modal-overlay')
   elModalOverlay.style.display = 'flex'
