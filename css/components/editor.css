@@ -3,6 +3,7 @@
 }
 
 .editor * {
+  transition: 0.3s;
   width: 100%;
 }
 
