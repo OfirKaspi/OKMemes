@@ -2,7 +2,7 @@
 
 :root {
   --clrPrimary1: rgb(140, 233, 0);
-  --clrPrimaryBase: rgb(150, 206, 65);
+  --clrPrimaryBase: #96ce41;
   --clrPrimary-1: rgba(150, 206, 65, 0.8);
 
   --bgc1: rgba(0, 0, 0, 0.5);

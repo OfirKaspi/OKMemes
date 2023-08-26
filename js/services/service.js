@@ -34,7 +34,6 @@ var gMeme = {
 
 var gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 }
 
-// GOOD ✔ - probably be broken when change the whole rendering process
 function lineSwitch() {
   gMeme.selectedLineIdx++
   if (gMeme.lines.length <= gMeme.selectedLineIdx) gMeme.selectedLineIdx = 0
@@ -42,17 +41,14 @@ function lineSwitch() {
   return gMeme.lines[gMeme.selectedLineIdx].txt
 }
 
-// GOOD ✔
 function setLineText(value) {
   gMeme.lines[gMeme.selectedLineIdx].txt = value
 }
 
-// GOOD ✔
 function changeTextColor(value) {
   gMeme.lines[gMeme.selectedLineIdx].color = value
 }
 
-// GOOD ✔
 function changeFontSize(value) {
   gMeme.lines[gMeme.selectedLineIdx].size += value
 }
@@ -61,7 +57,6 @@ function setSelectedImgId(id) {
   gMeme.selectedImgId = id
 }
 
-// GOOD ✔
 function setImg(el) {
   const url = new URL(el.src)
   const image = gImgs.find(img => img.url === url.pathname)
@@ -72,41 +67,10 @@ function chooseInput(value) {
   gMeme.selectedLineIdx = value
 }
 
-// GOOD ✔
 function getMeme() {
   return gMeme
 }
 
-// GOOD ✔
 function getImgs() {
   return gImgs
 }
-
-// function saveMemeToLocalStorage(canvasDataURL, metadata) {
-//   const savedMemes = this.getSavedMemesFromLocalStorage() || []
-//   savedMemes.push({ canvasDataURL, ...metadata })
-//   saveToStorage('savedMemes', savedMemes)
-// }
-
-// function getSavedMemesFromLocalStorage() {
-//   return loadFromStorage('savedMemes')
-// }
-
-// function createNewLine(pos) {
-//   gMeme.lines.push = {
-//     pos,
-//     txt: '---Add Text---',
-//     size: 20,
-//     color: 'blue',
-//     isDrag: false,
-//   }
-// }
-
-// function isCircleClicked(clickedPos) {
-//   const { pos } = gCircle
-//   // Calc the distance between two dots
-//   const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2)
-//   // console.log('distance', distance)
-//   //If its smaller then the radius of the circle we are inside
-//   return distance <= gCircle.size
-// }
