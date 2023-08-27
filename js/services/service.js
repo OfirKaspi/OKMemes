@@ -1,6 +1,7 @@
 'use strict'
 
 const STORAGE_KEY = 'memeDB'
+const imojis = ['😍', '💀', '🌞', '💣', '💋', '❓', '😎']
 
 var gImgs = [
   { id: 1, url: '/images/1.jpg', keywords: ['funny', 'crazy'] },
@@ -27,8 +28,14 @@ var gMeme = {
   selectedImgId: 2,
   selectedLineIdx: 0,
   lines: [
-    { txt: ' I sometimes eat Falafel ', size: 30, color: '#ffffff', isDrag: false },
-    { txt: ' I sometimes eat Shwarma ', size: 25, color: '#ffffff', isDrag: false },
+    { txt: 'Write a funny thing1', size: 30, color: '#ffffff', y: 20, isDrag: false },
+    {
+      txt: 'Write a funny thing2',
+      size: 30,
+      color: '#ffffff',
+      y: 350,
+      isDrag: false,
+    },
   ],
 }
 
@@ -50,6 +57,7 @@ function changeTextColor(value) {
 }
 
 function changeFontSize(value) {
+  console.log(gMeme.selectedLineIdx)
   gMeme.lines[gMeme.selectedLineIdx].size += value
 }
 
@@ -73,4 +81,28 @@ function getMeme() {
 
 function getImgs() {
   return gImgs
+}
+
+function getImojis() {
+  return imojis
+}
+
+function addLine(txt = undefined) {
+  if (txt) {
+    gMeme.lines.push({
+      txt,
+      size: 30,
+      color: '#ffffff',
+      y: 185,
+      isDrag: false,
+    })
+  } else {
+    gMeme.lines.push({
+      txt: `Write a funny thing${3}`,
+      size: 30,
+      color: '#ffffff',
+      y: 185,
+      isDrag: false,
+    })
+  }
 }

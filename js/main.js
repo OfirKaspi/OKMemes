@@ -10,6 +10,12 @@ function onInit() {
   gCtx = gElCanvas.getContext('2d')
   renderTextInput()
   renderGallery()
+  renderImojis()
+}
+
+function onAddLine() {
+  addLine()
+  renderMeme()
 }
 
 function onRandomMeme() {
@@ -68,7 +74,8 @@ function renderMeme() {
   newImage.src = image.url
   newImage.onload = () => {
     coverCanvasWithImg(newImage)
-    drawText()
+    console.log(meme.lines)
+    meme.lines.forEach(line => drawText(line, line.y))
   }
 }
 
@@ -127,19 +134,18 @@ function onChangeAlignment() {
   renderMeme()
 }
 
-function drawText(el = document.querySelector('.text-input'), x = gElCanvas.width / 2, y = 20) {
+function drawText(el, y = gElCanvas.width / 2, x = gElCanvas.width / 2) {
   const fontType = document.querySelector('.font-drop-down').value
   const fontAlign = document.querySelector('.font-align').value
-  const meme = getMeme()
-  const memeLine = meme.lines[meme.selectedLineIdx]
+  const strokeColor = document.querySelector('#strokeColor').value
   gCtx.lineWidth = 2
-  gCtx.strokeStyle = 'black'
-  gCtx.fillStyle = memeLine.color
-  gCtx.font = `${memeLine.size}px ${fontType}`
+  gCtx.strokeStyle = strokeColor
+  gCtx.fillStyle = el.color
+  gCtx.font = `${el.size}px ${fontType}`
   gCtx.textAlign = fontAlign
   gCtx.textBaseline = 'top'
 
-  const textWidth = gCtx.measureText(el.value).width
+  const textWidth = gCtx.measureText(el.txt).width
 
   if (fontAlign === 'left') {
     x = gElCanvas.width - textWidth // Adjust this value as needed for your desired left margin
@@ -147,6 +153,21 @@ function drawText(el = document.querySelector('.text-input'), x = gElCanvas.widt
     x = 0 + textWidth // Adjust this value as needed for your desired right margin
   }
 
-  gCtx.fillText(el.value, x, y)
-  gCtx.strokeText(el.value, x, y)
+  gCtx.fillText(el.txt, x, y)
+  gCtx.strokeText(el.txt, x, y)
+}
+
+function onDrawImoji(imoji) {
+  addLine(imoji)
+  renderMeme()
+}
+
+function renderImojis() {
+  const imojis = getImojis()
+  const strHTMLs = imojis.map(
+    imoji =>
+      `<span class="flex justify-center" onclick="onDrawImoji(this.innerText)">${imoji}</span>`
+  )
+  const elImojis = document.querySelector('.imojis')
+  elImojis.innerHTML = strHTMLs.join('')
 }

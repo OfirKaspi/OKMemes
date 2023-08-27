@@ -1,5 +1,6 @@
 .editor {
   gap: 20px;
+  width: 100%;
 }
 
 .editor * {
@@ -24,15 +25,22 @@
   box-shadow: 0 0 5px var(--clrPrimaryBase);
 }
 
-#textColor {
-  max-width: 20px;
-  max-height: 40px;
-  background-color: transparent;
-  border: none;
+.plus,
+.minus,
+.download {
+  width: fit-content;
+}
+
+.color-picker {
+  text-align: center;
+  font-size: 14px;
   cursor: pointer;
 }
-#textColor::-webkit-color-swatch {
-  border-radius: 15px;
+
+#textColor,
+#strokeColor {
+  visibility: hidden;
+  width: 0;
 }
 
 @media (max-width: 767px) {

@@ -31,10 +31,18 @@
         </div>
         <div class="editor flex column align-center justify-center">
           <input class="text-input" type="text" oninput="onSetLineText(this)" />
-          <button onclick="onLineSwitch()">Switch line</button>
-          <div class="gap flex">
+          <div class="text-changer flex imojis">
+            <!-- <span class="flex justify-center">🍒</span><span class="flex justify-center">🍒</span> -->
+          </div>
+          <div class="flex gap">
+            <button onclick="onLineSwitch()">Switch line</button>
+            <button class="add-line" onclick="onAddLine()">Add line</button>
+          </div>
+          <div class="flex gap">
+            <button class="plus" onclick="onChangeFontSize(1)">A+</button>
+            <button class="minus" onclick="onChangeFontSize(-1)">A-</button>
             <div class="text-changer flex align-center">
-              <label class="flex justify-center" for="textColor">Text Color:</label>
+              <label class="color-picker" for="textColor">Text color</label>
               <input
                 type="color"
                 id="textColor"
@@ -43,31 +51,41 @@
                 value="#ffffff"
               />
             </div>
+            <div class="text-changer flex align-center">
+              <label class="color-picker" for="strokeColor">Stroke color</label>
+              <input
+                type="color"
+                id="strokeColor"
+                class="flex"
+                oninput="renderMeme()"
+                value="#000000"
+              />
+            </div>
+          </div>
+          <div class="flex gap">
             <select class="text-changer font-align" onchange="onChangeAlignment()">
               <option value="center" selected>Align-Center</option>
               <option value="right">Align-Left</option>
               <option value="left">Align-Right</option>
             </select>
-          </div>
-          <div class="gap font-changes flex">
             <select class="font-drop-down text-changer" onchange="onChangeFont()">
               <option value="Impact" selected>Impact</option>
               <option value="Arial">Arial</option>
               <option value="Open Sans">Open Sans</option>
             </select>
-            <button class="plus" onclick="onChangeFontSize(1)">A+</button>
-            <button class="minus" onclick="onChangeFontSize(-1)">A-</button>
           </div>
           <div class="gap flex">
             <button class="download" onclick="downloadCanvas(this)" download="file-name">
               Download
             </button>
-            <button class="save" onclick="onSaveMeme()">Save Meme</button>
+            <button class="fb" onclick="onUploadImg()">Share on Facebook</button>
           </div>
-          <button class="fb" onclick="onUploadImg()">
-            Upload Image from Canvas and Share on Facebook
-          </button>
-          <!-- <button onclick="onToggleSecondLine(this)">Add Line</button> -->
+          <!-- <div class="flex gap">
+            <div class="text-changer">
+              <input type="file" id="image" onchange="onImgInput(event)" accept="image/*" />
+            </div>
+            <button class="save" onclick="onSaveMeme()">Save meme</button>
+          </div> -->
         </div>
         <button class="exit absolute" onclick="onCloseModal()">&#10006;</button>
       </div>
