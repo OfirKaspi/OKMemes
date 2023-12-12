@@ -1,6 +1,10 @@
-# OKMemes
+<h1 align="center">OKMemes</h1>
 
-![OKMemes Logo](link-to-your-logo)
+<p align="center">
+  <br/>
+  <img width="150px" src="https://res.cloudinary.com/dudwjf2pu/image/upload/v1702410383/icons8-angry-face-meme-100_hjazdq.png" alt="okmemes Logo" />
+</p>
+
 
 ## Overview
 
